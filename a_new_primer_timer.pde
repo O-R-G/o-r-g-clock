@@ -1,7 +1,7 @@
 // a new primer timer
 // july 13-15, 2018
 // Public Private Secret master
-// O-R-G 
+// O-R-G
 
 // on mac mini, requires a sound input source plugged in to run
 // b/c Sound library looks for equal channels in and out
@@ -11,7 +11,7 @@ import processing.sound.*;
 SoundFile ding, dang, dong;
 PFont sftext;
 // file, length seconds, line1, line2, line3, line4, line5
-String[][] meta = {  
+String[][] meta = {
   {"tetracono-1.mov", "123", "Tetracono", "macOS Screensaver", "", "Designed by Bruno Munari", "Published by http://www.o-r-g.com"},
   {"tetracono-2.mov", "100", "Tetracono", "macOS Screensaver", "", "Designed by Bruno Munari", "Published by http://www.o-r-g.com"},
   {"tetracono-3.mov", "97", "Tetracono", "macOS Screensaver", "", "Designed by Bruno Munari", "Published by http://www.o-r-g.com"},
@@ -27,6 +27,9 @@ String[][] meta = {
   {"breaking-like-surf.mov", "96", "Breaking Like Surf on a Shore Until", "macOS Screensaver", "", "Designed by David Reinfurt", "Published by http://www.o-r-g.com"},
   {"breaking-like-surf.mov", "96", "Breaking Like Surf on a Shore Until", "macOS Screensaver", "", "Designed by David Reinfurt", "Published by http://www.o-r-g.com"},
   {"breaking-like-surf.mov", "96", "Breaking Like Surf on a Shore Until", "macOS Screensaver", "", "Designed by David Reinfurt", "Published by http://www.o-r-g.com"},
+  {"collapsing-two-1.mov", "78", "The Result of Collapsing Two Simultaneous Views", "macOS Screensaver", "", "Designed by David Reinfurt", "Published by http://www.o-r-g.com"},
+  {"collapsing-two-1.mov", "78", "The Result of Collapsing Two Simultaneous Views", "macOS Screensaver", "", "Designed by David Reinfurt", "Published by http://www.o-r-g.com"},
+  {"collapsing-two-2.mov", "73", "The Result of Collapsing Two Simultaneous Views", "macOS Screensaver", "", "Designed by David Reinfurt", "Published by http://www.o-r-g.com"},
   {"al-gore-1.mov", "91", "Al Gore Woke Up One Morning Wondering", "macOS Screensaver", "", "Designed by David Reinfurt", "Published by http://www.o-r-g.com"},
   {"al-gore-2.mov", "110", "Al Gore Woke Up One Morning Wondering", "macOS Screensaver", "", "Designed by David Reinfurt", "Published by http://www.o-r-g.com"},
   {"al-gore-3.mov", "110", "Al Gore Woke Up One Morning Wondering", "macOS Screensaver", "", "Designed by David Reinfurt", "Published by http://www.o-r-g.com"},
@@ -44,7 +47,7 @@ String[][] meta = {
   {"jules-3.mov", "99", "Jules", "iOS App", "", "Designed by David Reinfurt", "Published by http://www.o-r-g.com"},
 };
 
-String[][] metaKM = {  
+String[][] metaKM = {
   {"km-11.mov", "60", "Three Times (in Blue and Yellow)", "macOS Screensaver", "", "Designed by Karel Martens", "Published by http://www.o-r-g.com"},
   {"km-12.mov", "60", "Three Times (in Blue and Yellow)", "macOS Screensaver", "", "Designed by Karel Martens", "Published by http://www.o-r-g.com"},
   {"km-13.mov", "60", "Three Times (in Blue and Yellow)", "macOS Screensaver", "", "Designed by Karel Martens", "Published by http://www.o-r-g.com"},
@@ -63,8 +66,8 @@ String[][] metaPrimer = {
 };
 
 int x, y;
-int h, m, s; 
-int hl, ml, sl; 
+int h, m, s;
+int hl, ml, sl;
 int lasthour;
 int lastmin;
 int lastsec;
@@ -86,7 +89,7 @@ int movieIdx = 0;
 
 void setup() {
   size(960, 960); // [960, 960]
-  //size(480, 480); 
+  //size(480, 480);
   frameRate(60);
   noCursor();
 
@@ -95,7 +98,7 @@ void setup() {
 
   x = width / 2;
   y = width / 2;
-  radius = int(width * .40);    
+  radius = int(width * .40);
 
   hl = (int)(radius * 0.50);
   ml = (int)(radius * 0.80);
@@ -117,10 +120,10 @@ void setup() {
   lasthour = hour();
   lastmin = minute();
   lastsec = second();
-  
+
   sftext = createFont("fonts/sf-text-regular.ttf", 24);
   textFont(sftext);
-  
+
 }
 
 void draw() {
@@ -158,7 +161,7 @@ void draw() {
       fill(255, 255, 255);
       noStroke();
       textAlign(LEFT, TOP);
-      
+
       int lineHeight = 30;
       int base = 20;
       for (int i = 2; i <= 6; i++) {
@@ -174,10 +177,10 @@ void playMovie(String[][] metaArray, int metaIdx) {
   if (millis_start + movieDuration*1000 < millis()) {
     currentMeta = metaArray[metaIdx%metaArray.length];
     normal = false;
-    
+
     movieDuration = Integer.parseInt(currentMeta[1]);
     millis_start = millis();
-    
+
     String path = dataPath(currentMeta[0]);
     //exec("/usr/bin/omxplayer", path, "-b", "--aspect-mode", "stretch");
     //exec("/usr/bin/lxterminal", "-e", "omxplayer", path, "-b", "--aspect-mode", "stretch");
@@ -248,7 +251,7 @@ int checkHour(int thish, int thislasthour) {
 
 int checkMin(int thism, int thislastmin) {
   if (thism != thislastmin) {
-    switch (thism) {            
+    switch (thism) {
       // ding only at :00
     case 0:
       ding.play();
@@ -273,7 +276,7 @@ int checkMin(int thism, int thislastmin) {
 int checkSec(int thiss, int thislastsec) {
   if (thiss != thislastsec) {
     thislastsec = thiss - 1;
-    switch (thiss) {            
+    switch (thiss) {
     case 0:
       break;
     default:
@@ -312,21 +315,24 @@ void keyPressed() {
     playMovie(meta, 12+randomOffset); // Breaking like surf on a shore until
     break;
   case '6':
-    playMovie(meta, 15+randomOffset); // Al Gore woke up one morning wondering..
+    playMovie(meta, 15+randomOffset); // The Result of Collapsing Two Simultaneous Views
     break;
   case '7':
-    playMovie(meta, 18+randomOffset); // Perhaps there is something left to save
+    playMovie(meta, 18+randomOffset); // Al Gore woke up one morning wondering..
     break;
   case '8':
-    playMovie(meta, 21+randomOffset); // Multi
+    playMovie(meta, 21+randomOffset); // Perhaps there is something left to save
     break;
   case '9':
-    playMovie(meta, 24+randomOffset); // Wyoscan
+    playMovie(meta, 24+randomOffset); // Multi
     break;
   case '0':
-    playMovie(meta, 27+randomOffset); //Jules
+    playMovie(meta, 27+randomOffset); // Wyoscan
     break;
   case '-':
+    playMovie(meta, 30+randomOffset); //Jules
+    break;
+  case '=':
     playMovie(metaPrimer, 0); // Primer
     break;
   case 'd':
